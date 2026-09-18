@@ -1,15 +1,25 @@
 import { useState, useEffect } from "react";
-import { ArrowRight, BrainCircuit, Target, Clock, Play, Pause, RotateCcw } from "lucide-react";
+import { ArrowRight, BrainCircuit, Play, Pause, RotateCcw } from "lucide-react";
 import Confetti from "react-confetti";
 
 export default function App() {
   // 🚨 REPLACE THIS LINK WITH YOUR ACTUAL PARTYROCK PUBLISHED URL 🚨
   const partyRockUrl = "https://partyrock.aws/u/insanhii/kFYmDS61S/NEXT-HOUR"; 
 
-  // Timer State
+  // Timer & App States
   const [timeLeft, setTimeLeft] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [customTime, setCustomTime] = useState("");
+  const [rewardMessage, setRewardMessage] = useState("");
+
+  // Dopamine Hit Messages
+  const successMessages = [
+    "Mission accomplished. Time saved. Let's go! 🚀",
+    "Deep work secured. You crushed it! 🔥",
+    "Focus level 100. Take a well-deserved break! 🎯",
+    "Another block built for the Builder's Collective! 👑"
+  ];
 
   // Timer Logic
   useEffect(() => {
@@ -20,6 +30,7 @@ export default function App() {
       }, 1000);
     } else if (timeLeft === 0 && isActive) {
       setIsActive(false);
+      setRewardMessage(successMessages[Math.floor(Math.random() * successMessages.length)]);
       setShowConfetti(true);
       setTimeout(() => setShowConfetti(false), 10000); // Stop confetti after 10s
     }
@@ -36,6 +47,7 @@ export default function App() {
     setTimeLeft(minutes * 60);
     setIsActive(false);
     setShowConfetti(false);
+    setRewardMessage(""); // Reset message on new timer
   };
 
   return (
@@ -91,12 +103,28 @@ export default function App() {
             {formatTime(timeLeft)}
           </div>
 
-          {/* Time Selectors */}
+          {/* Custom Time Selector */}
           {!isActive && timeLeft === 0 && (
-            <div className="flex gap-4 mb-6">
-              <button onClick={() => setTimer(15)} className="px-4 py-2 rounded-md bg-zinc-800 hover:bg-zinc-700 transition-colors text-sm font-medium">15 min</button>
-              <button onClick={() => setTimer(30)} className="px-4 py-2 rounded-md bg-zinc-800 hover:bg-zinc-700 transition-colors text-sm font-medium">30 min</button>
-              <button onClick={() => setTimer(45)} className="px-4 py-2 rounded-md bg-zinc-800 hover:bg-zinc-700 transition-colors text-sm font-medium">45 min</button>
+            <div className="flex gap-3 mb-6">
+              <input 
+                type="number" 
+                value={customTime}
+                onChange={(e) => setCustomTime(e.target.value)}
+                placeholder="Minutes"
+                min="1"
+                className="px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-zinc-500 w-28 text-center"
+              />
+              <button 
+                onClick={() => {
+                  if(customTime > 0) {
+                    setTimer(Number(customTime));
+                    setCustomTime("");
+                  }
+                }} 
+                className="px-6 py-2 rounded-lg bg-white text-black font-semibold hover:bg-zinc-200 transition-colors"
+              >
+                Set Time
+              </button>
             </div>
           )}
 
@@ -120,9 +148,9 @@ export default function App() {
           )}
 
           {/* Success Message */}
-          {showConfetti && (
-            <div className="text-green-400 font-medium mt-4 animate-pulse">
-              Mission accomplished. Time saved. Let's go! 🚀
+          {showConfetti && rewardMessage && (
+            <div className="text-green-400 font-medium mt-4 animate-pulse text-center px-4">
+              {rewardMessage}
             </div>
           )}
         </div>
