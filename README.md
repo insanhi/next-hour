@@ -7,7 +7,7 @@
 
 👥 Team TURIYA
 
-👨‍💻 Ansh Devkate (insanhi) — app, PartyRock, deploy
+👨‍💻 Ansh Devkate (insanhi) — app, PartyRock, deploy  
 📝 Om Kodilkar ([omkodilkar](https://github.com/omkodilkar)) — problem, copy, demo, submission
 
 🌐 **Live app:** https://next-hour-nine.vercel.app/  
@@ -57,6 +57,7 @@ git clone https://github.com/insanhi/next-hour.git
 cd next-hour
 npm install
 npm run dev
+```
 
 Open the URL Vite prints (usually `http://localhost:5173`).
 
