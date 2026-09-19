@@ -8,7 +8,7 @@
 👥 Team TURIYA
 
 👨‍💻 Ansh Devkate (insanhi) — app, PartyRock, deploy
-📝 Om Kodilkar (omyu / collaborator) — problem, copy, demo, submission
+📝 Om Kodilkar ([omkodilkar](https://github.com/omkodilkar)) — problem, copy, demo, submission
 
 🌐 **Live app:** https://next-hour-nine.vercel.app/  
 🧠 **AI coach (AWS PartyRock):** https://partyrock.aws/u/insanhii/kFYmDS61S/NEXT-HOUR  
@@ -57,3 +57,8 @@ git clone https://github.com/insanhi/next-hour.git
 cd next-hour
 npm install
 npm run dev
+
+Open the URL Vite prints (usually `http://localhost:5173`).
+
+## 📄 License
+Made for AWS First Commit 2026.
